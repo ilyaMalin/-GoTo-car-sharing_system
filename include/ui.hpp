@@ -1,42 +1,29 @@
 #ifndef UI_HPP
 
 #define UI_HPP
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#include "guiComponets.hpp"
 
-class Display
+class display
+{
+public:
+    virtual void draw(sf::RenderWindow &) const = 0;
+    virtual void update() = 0;
+    virtual void handleEvent(const sf::Event &) = 0;
+    virtual ~display() = default;
+};
+
+class signUp : public display
 {
 private:
-    const sf::Vector2u windowSize;
-    sf::RenderWindow window;
+    inputBox *_loginBox;
+    inputBox *_passwordBox;
 
 public:
-    Display(const sf::Vector2u = {500, 800});
-    bool isOpen() const;
-    std::optional<sf::Event> pollEvent();
-    void clear();
-    void display();
-    void close();
-};
-
-class SingIn : Display
-{
-};
-
-class SingUp : Display
-{
-};
-
-class Profile : Display
-{
-};
-
-class Map : Display
-{
-};
-
-class Rent : Display
-{
+    signUp(sf::Vector2f, sf::Vector2f, const sf::Font &);
+    void draw(sf::RenderWindow &) const override;
+    void update() override;
+    void handleEvent(const sf::Event &) override;
+    ~signUp();
 };
 
 #endif

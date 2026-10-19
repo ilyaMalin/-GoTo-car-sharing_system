@@ -1,48 +1,54 @@
 #include "ui.hpp"
+#include <iostream>
 
-Display::Display(const sf::Vector2u windowSize)
-    : windowSize(windowSize), window(sf::VideoMode(windowSize), "GoTo", sf::Style::Close | sf::Style::Titlebar) {}
-
-bool Display::isOpen() const
+signUp::signUp(sf::Vector2f boxSize, sf::Vector2f boxPosition, const sf::Font &font)
 {
-    return this->window.isOpen();
+    this->_loginBox = new inputBox(boxSize, boxPosition, font);
+    this->_passwordBox = new inputBox(boxSize, {boxPosition.x, boxPosition.y + 100.f}, font);
 }
 
-std::optional<sf::Event> Display::pollEvent()
+signUp::~signUp()
 {
-    return this->window.pollEvent();
+    delete this->_loginBox;
+    delete this->_passwordBox;
 }
 
-void Display::clear()
+void signUp::draw(sf::RenderWindow &window) const
 {
-    this->window.clear();
+    this->_loginBox->draw(window);
+    this->_passwordBox->draw(window);
 }
 
-void Display::display()
+void signUp::update()
 {
-    this->window.display();
+    this->_loginBox->setColor();
+    this->_passwordBox->setColor();
 }
 
-void Display::close()
+void signUp::handleEvent(const sf::Event &event)
 {
-    this->window.close();
-}
-
-int main()
-{
-    Display win;
-
-    while (win.isOpen())
+    if (event.is<sf::Event::MouseButtonPressed>())
     {
-        while (const std::optional event = win.pollEvent())
+        bool loginFocus = false;
+        bool passwordFocus = false;
+
+        sf::Vector2i mousePosition = event.getIf<sf::Event::MouseButtonPressed>()->position;
+        const auto &loginBoxBorder = this->_loginBox->getBoxBorder();
+        const auto &passwordBoxBorder = this->_passwordBox->getBoxBorder();
+
+        if (loginBoxBorder.contains(static_cast<sf::Vector2f>(mousePosition)))
         {
-            if (event->is<sf::Event::Closed>())
-            {
-                win.close();
-            }
+            loginFocus = true;
+        }
+        else if (passwordBoxBorder.contains(static_cast<sf::Vector2f>(mousePosition)))
+        {
+            passwordFocus = true;
         }
 
-        win.clear();
-        win.display();
+        this->_loginBox->setFocus(loginFocus);
+        this->_passwordBox->setFocus(passwordFocus);
     }
+
+    this->_loginBox->handleEvent(event);
+    this->_passwordBox->handleEvent(event);
 }
