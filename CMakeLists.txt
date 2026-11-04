@@ -22,7 +22,13 @@ if(NOT SFML_FOUND)
     FetchContent_MakeAvailable(SFML)
 endif()
 
-add_executable(GoTo src/ui.cpp)
+add_executable(GoTo
+    src/main.cpp
+    src/ui.cpp
+    src/guiComponets.cpp
+    src/loadFont.cpp
+    src/caret.cpp
+    )
 
 target_include_directories(GoTo PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include

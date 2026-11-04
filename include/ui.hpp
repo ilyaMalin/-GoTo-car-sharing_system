@@ -18,6 +18,8 @@ private:
     inputBox *_loginBox;
     inputBox *_passwordBox;
 
+    std::vector<textBox> _text;
+
 public:
     signUp(sf::Vector2f, sf::Vector2f, const sf::Font &);
     void draw(sf::RenderWindow &) const override;

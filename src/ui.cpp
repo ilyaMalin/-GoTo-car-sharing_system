@@ -5,6 +5,10 @@ signUp::signUp(sf::Vector2f boxSize, sf::Vector2f boxPosition, const sf::Font &f
 {
     this->_loginBox = new inputBox(boxSize, boxPosition, font);
     this->_passwordBox = new inputBox(boxSize, {boxPosition.x, boxPosition.y + 100.f}, font);
+
+    float textSize = boxSize.y * CHARSCALEINTOBOX;
+    this->_text.push_back(textBox(font, "Login", textSize, {boxPosition.x, boxPosition.y - textSize - 25}));
+    this->_text.push_back(textBox(font, "Password", textSize, {boxPosition.x, boxPosition.y + 100.f - textSize - 25}));
 }
 
 signUp::~signUp()
@@ -17,6 +21,9 @@ void signUp::draw(sf::RenderWindow &window) const
 {
     this->_loginBox->draw(window);
     this->_passwordBox->draw(window);
+
+    this->_text[0].draw(window);
+    this->_text[1].draw(window);
 }
 
 void signUp::update()
