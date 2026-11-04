@@ -1,16 +1,4 @@
-#include "guiComponets.hpp"
-
-box::box(sf::Vector2f boxSize, sf::Vector2f boxPositions, const sf::Font &font)
-    : _text(font, ""), _box(boxSize)
-{
-    this->_box.setPosition(boxPositions);
-    this->_text.setFillColor(sf::Color::Black);
-
-    float sizeCharacter = boxSize.y * CHARSCALEINTOBOX;
-    this->_text.setCharacterSize(sizeCharacter);
-
-    this->_text.setPosition({boxPositions.x + 10.f, boxPositions.y});
-}
+#include "inputBox.hpp"
 
 inputBox::inputBox(sf::Vector2f boxSize, sf::Vector2f boxPositions, const sf::Font &font)
     : box(boxSize, boxPositions, font), _caret(boxSize, boxPositions) {}
@@ -19,11 +7,11 @@ void inputBox::setColor()
 {
     if (this->_isFocused)
     {
-        this->_box.setFillColor({210, 212, 211});
+        this->_box.setFillColor({171, 171, 171});
         return;
     }
 
-    this->_box.setFillColor({171, 171, 171});
+    this->_box.setFillColor({210, 212, 211});
 }
 
 void inputBox::setFocus(bool focus)
@@ -128,35 +116,4 @@ void inputBox::handleEvent(const sf::Event &event)
         const auto &textEntered = event.getIf<sf::Event::TextEntered>();
         this->handleTextEntered(*textEntered);
     }
-}
-
-void outBox::setVisible(bool visible)
-{
-    this->_isVisible = visible;
-}
-
-void outBox::setOutText(const std::string &outText)
-{
-    this->_text.setString(outText);
-}
-
-void outBox::draw(sf::RenderWindow &window) const
-{
-    if (this->_isVisible)
-    {
-        window.draw(this->_box);
-        window.draw(this->_text);
-    }
-}
-
-textBox::textBox(const sf::Font &font, sf::String text, float &sizeChar, sf::Vector2f textPosition)
-    : _text(font, text, sizeChar)
-{
-    this->_text.setPosition(textPosition);
-    this->_text.setFillColor(sf::Color::Black);
-}
-
-void textBox::draw(sf::RenderWindow &window) const
-{
-    window.draw(this->_text);
 }
