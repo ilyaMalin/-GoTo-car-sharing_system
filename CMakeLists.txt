@@ -35,6 +35,8 @@ add_executable(GoTo
     src/signIn.cpp
     src/referenceSwitch.cpp
     src/updateView.cpp
+    src/display.cpp
+    src/profile.cpp
 )
 
 target_include_directories(GoTo PRIVATE

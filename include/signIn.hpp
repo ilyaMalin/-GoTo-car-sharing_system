@@ -7,7 +7,6 @@ class signIn : public formScreen
 {
 public:
     signIn(referenceSwitch &, sf::Vector2f, sf::Vector2f, const sf::Font &);
-    void setStateWin() override;
 };
 
 #endif

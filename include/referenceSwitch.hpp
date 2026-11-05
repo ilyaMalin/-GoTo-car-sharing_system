@@ -5,19 +5,12 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include "stateWin.hpp"
 #include <memory>
-
-enum class STATEWIN
-{
-    SIGNUP = 1,
-    SIGNIN = 2,
-    PROFILE = 3,
-    MAP = 4,
-    RENTCAT = 5
-};
 
 class signUp;
 class signIn;
+class profile;
 
 class referenceSwitch
 {
@@ -26,6 +19,7 @@ private:
 
     std::unique_ptr<signUp> _signUp;
     std::unique_ptr<signIn> _signIn;
+    std::unique_ptr<profile> _profile;
 
 public:
     referenceSwitch(const sf::Font &, sf::Vector2f, sf::Vector2f);

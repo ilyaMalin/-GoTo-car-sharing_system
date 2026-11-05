@@ -4,7 +4,7 @@ void caret::update() const
 {
     if (_clock.getElapsedTime().asSeconds() >= .5f)
     {
-        _clock.restart();
+        this->_clock.restart();
         this->_isVisible = !this->_isVisible;
     }
 }

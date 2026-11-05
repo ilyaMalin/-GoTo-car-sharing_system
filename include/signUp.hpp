@@ -7,7 +7,6 @@ class signUp : public formScreen
 {
 public:
     signUp(referenceSwitch &, sf::Vector2f boxSize, sf::Vector2f boxPosition, const sf::Font &font);
-    void setStateWin() override;
 };
 
 #endif
