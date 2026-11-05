@@ -33,6 +33,8 @@ add_executable(GoTo
     src/formScreen.cpp
     src/signUp.cpp
     src/signIn.cpp
+    src/referenceSwitch.cpp
+    src/updateView.cpp
 )
 
 target_include_directories(GoTo PRIVATE

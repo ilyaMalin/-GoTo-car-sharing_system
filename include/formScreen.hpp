@@ -13,14 +13,19 @@ protected:
     std::vector<std::unique_ptr<inputBox>> _inputFields;
     std::vector<textBox> _labels;
 
+    sf::Text _switchText;
+    sf::Color _defaultColor{80, 80, 80};
+    sf::Color _hoverColor{30, 144, 255};
+
+    void setSwitchText(const std::string &, sf::Vector2f, const float);
+
 public:
-    formScreen(const sf::Font &font, const std::string &titleText, sf::Vector2f titlePos);
-
-    void draw(sf::RenderWindow &window) const override;
+    formScreen(referenceSwitch &, const sf::Font &, const std::string &, sf::Vector2f);
+    void draw(sf::RenderWindow &) const override;
     void update() override;
-    void handleEvent(const sf::Event &event) override;
-
-    void addField(sf::Vector2f size, sf::Vector2f position, const sf::Font &font, const std::string &labelText);
+    void handleEvent(const sf::Event &, const sf::RenderWindow &) override;
+    virtual void setStateWin() override = 0;
+    void addField(sf::Vector2f, sf::Vector2f, const sf::Font &, const std::string &);
 };
 
 #endif
