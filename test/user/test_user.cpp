@@ -8,17 +8,17 @@
 
 int main() {
     User u;
-    assert(!User::create("ab", "pass123", u));      // короткий логин
-    assert(!User::create("aleksey", "123", u));     // слабый пароль
+    assert(!User::create("ab", "pass123", u));
+    assert(!User::create("aleksey", "123", u));
     assert(User::create("aleksey", "pass123", u));
     assert(u.checkPassword("pass123") && !u.checkPassword("wrong"));
 
-    assert(!u.canRent());                           // нет прав и денег
+    assert(!u.canRent());
     u.license() = DriverLicense("AB123456", "B", 2030);
     u.wallet().topUp(50);
     assert(u.canRent());
     u.history().start(7, 1000);
-    assert(!u.canRent());                           // уже есть активная аренда
+    assert(!u.canRent());
     u.history().finish(4600, 12.5);
     u.wallet().charge(12.5);
     assert(u.wallet().balance() == 37.5);
