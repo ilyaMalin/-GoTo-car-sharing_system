@@ -46,6 +46,10 @@ add_executable(GoTo
     src/formScreen.cpp
     src/signUp.cpp
     src/signIn.cpp
+    src/referenceSwitch.cpp
+    src/updateView.cpp
+    src/display.cpp
+    src/profile.cpp
     ${USER_SOURCES}
 )
 
