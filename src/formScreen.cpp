@@ -70,3 +70,10 @@ void formScreen::handleEvent(const sf::Event &event, const sf::RenderWindow &win
         box->handleEvent(event);
     }
 }
+std::string formScreen::getFieldText(std::size_t index) const
+{
+    if (index >= _inputFields.size())
+        return {};
+
+    return _inputFields[index]->getText();
+}
