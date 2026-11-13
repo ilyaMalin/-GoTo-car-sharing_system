@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <cstddef>
 
 class formScreen : public display
 {
@@ -20,6 +21,7 @@ public:
     void update() override;
     void handleEvent(const sf::Event &, const sf::RenderWindow &) override;
     void addField(sf::Vector2f, sf::Vector2f, const sf::Font &, const std::string &);
+    std::string getFieldText(std::size_t index) const;
 };
 
 #endif

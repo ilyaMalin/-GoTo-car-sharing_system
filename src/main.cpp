@@ -1,3 +1,4 @@
+#include "database.hpp"
 #include "referenceSwitch.hpp"
 #include "updateView.hpp"
 #include <SFML/Graphics.hpp>
@@ -5,6 +6,8 @@
 
 int main()
 {
+if (!initializeDatabase())
+return 1;
     sf::RenderWindow window(sf::VideoMode({600, 800}), "GoTo", sf::Style::Default);
 
     sf::Font font;
