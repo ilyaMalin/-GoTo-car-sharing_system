@@ -1,5 +1,6 @@
 #include "signUp.hpp"
 #include "referenceSwitch.hpp"
+#include "database.hpp"
 
 signUp::signUp(referenceSwitch &referenceSwitch, sf::Vector2f boxSize, sf::Vector2f boxPosition, const sf::Font &font)
     : formScreen(referenceSwitch, font, "Sign Up", {110.f, 125.f})
@@ -11,4 +12,15 @@ signUp::signUp(referenceSwitch &referenceSwitch, sf::Vector2f boxSize, sf::Vecto
     this->addField(boxSize, {boxPosition.x, boxPosition.y + 2 * fieldStep}, font, "Phone Number");
     this->addReference(font, "Already have an account? Sign In", boxSize.y * CHARSCALEINTOBOX * 0.6, {boxPosition.x, boxPosition.y + fieldStep * 2.f + boxSize.y + 25.f}, STATEWIN::SIGNIN);
     addButton(font, "Registration", 24, {boxPosition.x, boxPosition.y + fieldStep * 3.f}, {boxSize.x, 60.f}, STATEWIN::PROFILE);
+}
+
+void signUp::handleButtonAction(STATEWIN target)
+{
+    if (target == STATEWIN::PROFILE)
+    {
+        if (!registerUser(getFieldText(0), getFieldText(1), getFieldText(2)))
+            return;
+    }
+
+    display::handleButtonAction(target);
 }

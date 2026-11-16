@@ -14,7 +14,7 @@ if(NOT SFML_FOUND)
         GIT_REPOSITORY https://github.com/SFML/SFML
         GIT_TAG        3.1.0
     )
-    
+
     set(SFML_BUILD_EXAMPLES OFF CACHE INTERNAL "")
     set(SFML_BUILD_TESTS OFF CACHE INTERNAL "")
     set(SFML_BUILD_DOC OFF CACHE INTERNAL "")
@@ -22,8 +22,11 @@ if(NOT SFML_FOUND)
     FetchContent_MakeAvailable(SFML)
 endif()
 
-add_executable(GoTo 
-    src/main.cpp 
+find_package(SQLite3 REQUIRED)
+
+add_executable(GoTo
+    src/main.cpp
+src/database.cpp
     src/box.cpp
     src/loadFont.cpp
     src/inputBox.cpp
@@ -44,13 +47,14 @@ target_include_directories(GoTo PRIVATE
 )
 
 if(WIN32)
-    set_target_properties(GoTo PROPERTIES 
+    set_target_properties(GoTo PROPERTIES
         WIN32_EXECUTABLE OFF
     )
 endif()
 
-target_link_libraries(GoTo PRIVATE 
-    SFML::Graphics 
-    SFML::Window 
-    SFML::System 
+target_link_libraries(GoTo PRIVATE
+    SFML::Graphics
+    SFML::Window
+    SFML::System
+    SQLite3::SQLite3
 )

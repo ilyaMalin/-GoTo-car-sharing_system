@@ -107,11 +107,16 @@ bool display::handleButtonsEvent(const sf::Event &event, const sf::RenderWindow 
         {
             if (this->_buttons[i].getGlobalBounds().contains(mousePosition))
             {
-                this->_referenceSwitch.setStateWin(this->_buttonTargets[i]);
+                this->handleButtonAction(this->_buttonTargets[i]);
                 return true;
             }
         }
     }
 
     return false;
+}
+
+void display::handleButtonAction(STATEWIN target)
+{
+    _referenceSwitch.setStateWin(target);
 }

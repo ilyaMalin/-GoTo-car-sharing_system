@@ -1,3 +1,4 @@
+
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
@@ -39,8 +40,10 @@ public:
     virtual void update() = 0;
     virtual void handleEvent(const sf::Event &event, const sf::RenderWindow &) = 0;
     virtual ~display() = default;
+
     void addReference(const sf::Font &, const std::string &, unsigned int, sf::Vector2f, STATEWIN);
     void addButton(const sf::Font &, const std::string &, unsigned int, sf::Vector2f, sf::Vector2f, STATEWIN);
+    virtual void handleButtonAction(STATEWIN target);
 };
 
 #endif
